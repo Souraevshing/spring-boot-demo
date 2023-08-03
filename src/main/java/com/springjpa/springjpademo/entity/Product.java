@@ -1,6 +1,8 @@
 package com.springjpa.springjpademo.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -54,7 +56,14 @@ public class Product {
     private BigDecimal price;
     private boolean active;
     private String imageUrl;
+
+    //CreationTimestamp is used to keep track of time at which table is created
+    //UpdateTimestamp is used to keep track of time at which table is updated
+
+    @CreationTimestamp
     private LocalDateTime dateCreated;
+
+    @UpdateTimestamp
     private LocalDateTime dateUpdated;
 
     public Product() {
