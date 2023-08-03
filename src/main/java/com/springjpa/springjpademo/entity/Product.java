@@ -11,9 +11,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//UniqueConstraint is used to specify any column to be always unique
-//name = unique name
-//columnNames = which column name to be changed
+//      Lombok library is used to reduce boilerplate code.
+//      Getter is used to generate getter methods
+//      Setter is used to generate setter methods
+//      NoArgsConstructor for default constructor
+//      AllArgsConstructor for parametrized constructor
+
+//      UniqueConstraint is used to specify any column to be always unique
+//      name = unique name
+//      columnNames = which column name to be changed
 
 @Entity
 @Getter
