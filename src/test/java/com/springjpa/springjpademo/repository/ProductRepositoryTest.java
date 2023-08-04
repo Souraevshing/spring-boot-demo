@@ -92,4 +92,18 @@ class ProductRepositoryTest {
         });
     }
 
+    @Test
+    void deleteByIdData() {
+        Long id = 7L;
+        productRepository.deleteById(id);
+    }
+
+    @Test
+    void deleteData() {
+        Long id = 6L;
+        Product product = productRepository.findById(id).get();
+        productRepository.delete(product);
+
+    }
+
 }
