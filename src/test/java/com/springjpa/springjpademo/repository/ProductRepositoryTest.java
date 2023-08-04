@@ -28,7 +28,7 @@ class ProductRepositoryTest {
 
         System.out.println("The Product has been saved to db with following values :\t");
         System.out.println(savedData.toString());
-
+        System.out.println();
         System.out.println(savedData.getId());
     }
 
@@ -42,6 +42,7 @@ class ProductRepositoryTest {
 
         System.out.println("The Product has been updated to db with following values :\t");
         System.out.println(updatedData.toString());
+        System.out.println();
         System.out.println(updatedData.getId());
     }
 
@@ -52,6 +53,7 @@ class ProductRepositoryTest {
 
         System.out.println("The Product fetched from db with id "+id+" is:\n");
         System.out.println(productById.toString());
+        System.out.println();
     }
 
 }
