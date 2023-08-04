@@ -83,4 +83,13 @@ class ProductRepositoryTest {
         System.out.println();
     }
 
+    @Test
+    void findAllData() {
+        List <Product> products = productRepository.findAll();
+        products.forEach((data) -> {
+            System.out.println(data.toString());
+            System.out.println();
+        });
+    }
+
 }
