@@ -31,8 +31,17 @@ class ProductRepositoryTest {
         System.out.println(savedData.getId());
     }
 
+    @Test
     void updateData() {
+        Product product = productRepository.findById(1L).get();
+        product.setName("MacBook Pro 2023");
 
+        //here save() method will update db since Product is existing entity in db and have primary key, so it will call EntityManager merge() method to merge/update db.
+        Product updatedData = productRepository.save(product);
+
+        System.out.println("The Product has been updated to db with following values :\t");
+        System.out.println(updatedData.toString());
+        System.out.println(updatedData.getId());
     }
 
 }

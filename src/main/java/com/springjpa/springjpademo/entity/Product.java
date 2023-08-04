@@ -69,8 +69,8 @@ public class Product {
     private boolean active;
     private String imageUrl;
 
-    //CreationTimestamp is used to keep track of time at which table is created
-    //UpdateTimestamp is used to keep track of time at which table is updated
+    //CreationTimestamp is used to keep track of time at which table is created, we don't need to set dateCreated value, hibernate will automatically generate date for it.
+    //UpdateTimestamp is used to keep track of time at which table is updated, we don't need to set dateCreated value, hibernate will automatically generate date for it.
 
     @CreationTimestamp
     private LocalDateTime dateCreated;
