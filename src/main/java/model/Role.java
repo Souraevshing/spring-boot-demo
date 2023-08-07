@@ -15,8 +15,8 @@ public class Role {
 
     }
 
-    public Role(Long id, String name) {
-        this.id = id;
+    public Role(String name) {
+        super();
         this.name = name;
     }
 
