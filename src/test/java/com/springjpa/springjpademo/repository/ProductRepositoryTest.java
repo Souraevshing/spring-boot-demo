@@ -102,7 +102,7 @@ class ProductRepositoryTest {
     void deleteData() {
         Long id = 6L;
         Product product = productRepository.findById(id).orElseThrow();
-        productRepository.delete(product);
+        productRepository.delete(product);      //deletes only one row after fetched by id
     }
 
     @Test
@@ -113,4 +113,9 @@ class ProductRepositoryTest {
         productRepository.deleteAll(List.of(p1,p2));    //first we select the row by id(here, primary key) then pass List of rows fetched as argument to delete fetched rows.
     }
 
+    @Test
+    void countRows() {
+        long count = productRepository.count();
+        System.out.println(count);
+    }
 }
