@@ -4,8 +4,11 @@ import com.springjpa.springjpademo.entity.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -20,7 +23,7 @@ class ProductRepositoryTest {
         Product product = new Product();
         product.setName("MacBook Pro");
         product.setDescription("Apple Product");
-        product.setSku("900");
+        product.setSku("9000");
         product.setPrice(new BigDecimal(129900));
         product.setActive(true);
         product.setImageUrl("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202206?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1664497359481");
@@ -125,4 +128,23 @@ class ProductRepositoryTest {
         boolean isExist = productRepository.existsById(id);
         System.out.println(isExist);
     }
+
+   @Test
+    void sorting() {
+        String name = "name";
+        String description = "description";
+        String orderBy = "desc";
+
+        Sort sortByName = orderBy.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(name).ascending() : Sort.by(name).descending();
+        Sort sortByDescription = orderBy.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(description).ascending() : Sort.by(description).descending();
+
+        Sort sort = sortByName.and(sortByDescription);
+
+        List<Product> products = productRepository.findAll(sort);
+
+        products.forEach((item) -> {
+            System.out.println(item);
+        });
+
+   }
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 //      Lombok library is used to reduce boilerplate code.
 //      Getter is used to generate getter methods
