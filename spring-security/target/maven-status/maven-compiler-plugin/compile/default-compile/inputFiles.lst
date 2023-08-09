@@ -1,0 +1,10 @@
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/repository/UserRepository.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/web/UserRegistrationController.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/model/User.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/model/Role.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/config/SecurityConfiguration.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/service/UserService.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/web/dto/UserRegistrationDto.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/service/UserServiceImpl.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/RegistrationLoginSpringBootSecurityThymeleafApplication.java
+/Users/sourav/Desktop/JAVA/registration-login-spring-boot-security-thymeleaf-hibernate/src/main/java/net/javaguides/springboot/web/MainController.java
