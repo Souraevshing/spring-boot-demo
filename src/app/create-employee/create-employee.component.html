@@ -1,0 +1,57 @@
+<form
+  [formGroup]="createForm"
+  class="example-form form-container"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>First Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter First Name"
+      name="firstName"
+      formControlName="firstName"
+      [(ngModel)]="employee.firstName"
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>Last Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter Last Name"
+      name="lastName"
+      formControlName="lastName"
+      [(ngModel)]="employee.lastName"
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="emailId"
+      placeholder="Enter email id"
+      [(ngModel)]="employee.emailId"
+    />
+    <mat-error *ngIf="createForm.get('emailId') && !createForm.get('emailId')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error> Email is <strong>required</strong> </mat-error>
+  </mat-form-field>
+  <button class="submit-btn" type="submit" mat-raised-button color="accent">
+    Submit
+  </button>
+  <button
+    style="margin-top: 20px;"
+    class="submit-btn"
+    type="button"
+    mat-raised-button
+    color="basic"
+    (click)="navigateToLanding()"
+  >
+    Back
+  </button>
+</form>

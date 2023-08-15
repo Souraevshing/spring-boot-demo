@@ -1,0 +1,64 @@
+<form
+  [formGroup]="updateForm"
+  class="example-form form-container"
+  (ngSubmit)="onUpdate()"
+>
+  <app-loading *ngIf="!updatedEmployee"></app-loading>
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>First Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter First Name"
+      name="firstName"
+      formControlName="firstName"
+      [(ngModel)]="updatedEmployee.firstName"
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>Last Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter Last Name"
+      name="lastName"
+      formControlName="lastName"
+      [(ngModel)]="updatedEmployee.lastName"
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" color="accent">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="emailId"
+      placeholder="Enter email id"
+      [(ngModel)]="updatedEmployee.emailId"
+    />
+    <mat-error *ngIf="updateForm.get('emailId') && !updateForm.get('emailId')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error> Email is <strong>required</strong> </mat-error>
+  </mat-form-field>
+  <button
+    class="submit-btn"
+    type="submit"
+    mat-raised-button
+    color="accent"
+    (click)="onUpdate()"
+  >
+    Update
+  </button>
+  <button
+    style="margin-top: 20px;"
+    class="submit-btn"
+    type="button"
+    mat-raised-button
+    color="basic"
+    (click)="navigateToLanding()"
+  >
+    Back
+  </button>
+</form>

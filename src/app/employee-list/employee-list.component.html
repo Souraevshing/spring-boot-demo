@@ -1,0 +1,44 @@
+<mat-expansion-panel disabled hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-description style="color: #3565b9;">
+      First Name
+    </mat-panel-description>
+    <mat-panel-description style="color: #3565b9;">
+      Last Name
+    </mat-panel-description>
+    <mat-panel-description style="color: #3565b9;">
+      Email
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-expansion-panel-header *ngFor="let employee of employees">
+    <app-loading *ngIf="!employee"></app-loading>
+    <mat-panel-description (click)="onView(employee.id)">
+      {{ employee.firstName }}
+    </mat-panel-description>
+    <mat-panel-description (click)="onView(employee.id)">
+      {{ employee.lastName }}
+    </mat-panel-description>
+    <mat-panel-description (click)="onView(employee.id)">
+      {{ employee.emailId }}
+    </mat-panel-description>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onView(employee.id)">
+        <mat-icon>visibility</mat-icon>
+        <span>View</span>
+      </button>
+      <button mat-menu-item (click)="updateEmployee(employee.id)">
+        <mat-icon>update</mat-icon>
+        <span>Update</span>
+      </button>
+      <button mat-menu-item (click)="deleteEmployee(employee.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </mat-expansion-panel-header>
+</mat-expansion-panel>
