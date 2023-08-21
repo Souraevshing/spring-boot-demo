@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Student Management System</a>
+        <a class="navbar-brand" href="@{/students}">Student Management System</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -76,7 +76,7 @@
                 </a>
             </td>
             <td>
-                <a th:href="@{/students/delete/{id}(id=${student.id})}">
+                <a th:href="@{/students/{id}(id=${student.id})}">
                     <span class="material-symbols-outlined">
                         delete
                     </span>
