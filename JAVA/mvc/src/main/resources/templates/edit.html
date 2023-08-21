@@ -51,7 +51,7 @@
   </div>
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-      <form class="row g-3 needs-validation" novalidate th:action="@{/students}" th:object="${student}" method="POST">
+      <form class="row g-3 needs-validation" novalidate th:action="@{/students/{id} (id=${student.id})}" th:object="${student}" method="POST">
         <div class="col-md-4">
           <label for="validationCustom01" class="form-label">First name</label>
           <input type="text" name="firstName" th:field="*{firstName}" class="form-control" id="validationCustom01" placeholder="Enter First Name" required>

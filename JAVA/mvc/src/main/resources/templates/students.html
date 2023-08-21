@@ -69,14 +69,14 @@
             <td th:text = "${student.lastName}"></td>
             <td th:text = "${student.email}"></td>
             <td>
-                <a th:href="@{/students/edit/{id}{id=${student.id}}}">
+                <a th:href="@{/students/edit/{id}(id=${student.id})}">
                     <span class="material-symbols-outlined">
                         update
                     </span>
                 </a>
             </td>
             <td>
-                <a th:href="@{/students/delete/{id}{id=${student.id}}}">
+                <a th:href="@{/students/delete/{id}(id=${student.id})}">
                     <span class="material-symbols-outlined">
                         delete
                     </span>
