@@ -5,11 +5,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
+import springrestapii.demo.mapper.UserMapper;
+import springrestapii.demo.mapper.UserMapping;
 import springrestapii.demo.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+// We have ModelMapper library and MapStruct library but we have used MapStruct library to automatically map jpa objects to dto and vice-versa.
 
 @Service
 @AllArgsConstructor
@@ -22,11 +26,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
         //converting UserDto to JPA entity and then pass as argument to repository.
-        User user = modelMapper.map(userDto, User.class);
+        //User user = modelMapper.map(userDto, User.class);
+
+        User user = UserMapping.MAPPER.convertToJpa(userDto);
 
         User savedUser = userRepository.save(user);
 
-        UserDto savedUserDto = modelMapper.map(savedUser,UserDto.class);
+        //UserDto savedUserDto = modelMapper.map(savedUser,UserDto.class);
+
+        UserDto savedUserDto = UserMapping.MAPPER.convertToDto(savedUser);
 
         return savedUserDto;
     }
@@ -36,14 +44,20 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findById(id);
         User usersList = user.get();
 
-        return modelMapper.map(usersList,UserDto.class);
+        //return modelMapper.map(usersList,UserDto.class);
+        return UserMapping.MAPPER.convertToDto(usersList);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
 
+
+    /*
         return users.stream().map((user -> modelMapper.map(user,UserDto.class)))
+                .collect(Collectors.toList());
+    */
+        return users.stream().map((user -> UserMapping.MAPPER.convertToDto(user)))
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +67,8 @@ public class UserServiceImpl implements UserService {
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
-        return modelMapper.map(userRepository.save(existingUser),UserDto.class);
+        //return modelMapper.map(userRepository.save(existingUser),UserDto.class);
+        return UserMapping.MAPPER.convertToDto(existingUser);
     }
 
     @Override
