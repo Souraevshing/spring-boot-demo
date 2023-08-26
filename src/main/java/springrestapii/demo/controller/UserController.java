@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springrestapii.demo.dto.UserDto;
-import springrestapii.demo.entity.User;
 import springrestapii.demo.service.UserService;
 
 import java.util.List;
@@ -24,22 +23,22 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
-        User user = userService.findById(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<UserDto> findById(@PathVariable("id") Long id) {
+        UserDto user = userService.findById(id);
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> allUsers = userService.getAllUsers();
-        return new ResponseEntity<>(allUsers,HttpStatus.OK);
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> allUsers = userService.getAllUsers();
+        return new ResponseEntity<List<UserDto>>(allUsers,HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto user) {
         user.setId(id);
-        User updatedUser = userService.updateUser(user);
-        return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
+        UserDto updatedUser = userService.updateUser(user);
+        return new ResponseEntity<UserDto>(updatedUser,HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

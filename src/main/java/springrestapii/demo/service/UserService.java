@@ -1,17 +1,14 @@
 package springrestapii.demo.service;
 
 import springrestapii.demo.dto.UserDto;
-import springrestapii.demo.entity.User;
-
 import java.util.List;
 
 public interface UserService {
 
     UserDto createUser(UserDto user);
-    User findById(Long id);
-    List<User> getAllUsers();
-    User updateUser(User user);
-
+    UserDto findById(Long id);
+    List<UserDto> getAllUsers();
+    UserDto updateUser(UserDto user);
     void deleteUserById(Long id);
 
 }

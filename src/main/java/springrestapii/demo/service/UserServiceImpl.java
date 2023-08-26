@@ -9,6 +9,7 @@ import springrestapii.demo.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,23 +28,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long id) {
+    public UserDto findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.get();
+        User usersList = user.get();
+
+        return UserMapper.convertToDto(usersList);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+
+        return users.stream().map((UserMapper::convertToDto))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public User updateUser(User user) {
+    public UserDto updateUser(UserDto user) {
         User existingUser = userRepository.findById(user.getId()).get();
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
-        return userRepository.save(existingUser);
+        return UserMapper.convertToDto(userRepository.save(existingUser));
     }
 
     @Override
