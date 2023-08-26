@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalException {
 
+    // this method will handle resource not found or 404 exception for any request
     @ExceptionHandler(ResourceNotFound.class)
     public ResponseEntity<Error> handleResourceNotFoundException(ResourceNotFound resourceNotFound, WebRequest request) {
 
@@ -33,6 +34,37 @@ public class GlobalException {
         );
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+
+    }
+
+    // this method will handle email already exists or 400 exception for any request
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<Error> handleResourceNotFoundException(EmailException emailException, WebRequest request) {
+
+        Error error = new Error(
+                LocalDateTime.now(),
+                emailException.getMessage(),
+                request.getDescription(false),
+                400L
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+    // if spring throws any other exceptions other than above exceptions, then this method will handle the exception
+    // and will throw Internal server error or500
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Error> handleResourceNotFoundException(Exception exception, WebRequest request) {
+
+        Error error = new Error(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                request.getDescription(false),
+                500L
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 

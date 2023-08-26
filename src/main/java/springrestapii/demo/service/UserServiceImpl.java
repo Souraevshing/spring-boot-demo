@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
+import springrestapii.demo.exception.EmailException;
 import springrestapii.demo.exception.ResourceNotFound;
 import springrestapii.demo.mapper.UserMapper;
 import springrestapii.demo.mapper.UserMapping;
@@ -29,6 +30,14 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
         //converting UserDto to JPA entity and then pass as argument to repository.
         //User user = modelMapper.map(userDto, User.class);
+
+        //find user by email
+        Optional<User> isFound = userRepository.findByEmail(userDto.getEmail());
+
+        //if user found with email, then throw exception and block user to create user only with unique email.
+        if (isFound.isPresent()) {
+            throw new EmailException("Email already in use");
+        }
 
         User user = UserMapping.MAPPER.convertToJpa(userDto);
 
