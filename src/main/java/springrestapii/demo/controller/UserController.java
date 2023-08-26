@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import springrestapii.demo.dto.UserDto;
+import springrestapii.demo.exception.Error;
+import springrestapii.demo.exception.ResourceNotFound;
 import springrestapii.demo.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -45,6 +49,22 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return new ResponseEntity<>("Deleted",HttpStatus.OK);
+    }
+
+    //@ExceptionHandler is used to throw custom exception like here we are throwing custom error message, code.
+    //In parameter of @ExceptionHandler we pass Exception class name which we want to throw, here we are throwing exception from
+    //ResourceNotFound class
+
+    @ExceptionHandler(ResourceNotFound.class)
+    public ResponseEntity<Error> handleError(ResourceNotFound resourceNotFound, WebRequest request) {
+        Error errorDetails = new Error(
+                LocalDateTime.now(),
+                resourceNotFound.getMessage(),
+                request.getDescription(false),
+                404L
+        );
+
+        return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
     }
 
 }

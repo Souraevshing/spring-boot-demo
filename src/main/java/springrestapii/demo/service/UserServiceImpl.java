@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
+import springrestapii.demo.exception.ResourceNotFound;
 import springrestapii.demo.mapper.UserMapper;
 import springrestapii.demo.mapper.UserMapping;
 import springrestapii.demo.repository.UserRepository;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-// We have ModelMapper library and MapStruct library but we have used MapStruct library to automatically map jpa objects to dto and vice-versa.
+// We have ModelMapper library and MapStruct library,
+// but we have used MapStruct library to automatically map jpa objects to dto and vice-versa.
 
 @Service
 @AllArgsConstructor
@@ -41,11 +43,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        User usersList = user.get();
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFound("User", "id", id)
+        );
 
         //return modelMapper.map(usersList,UserDto.class);
-        return UserMapping.MAPPER.convertToDto(usersList);
+        return UserMapping.MAPPER.convertToDto(user);
     }
 
     @Override
@@ -63,7 +66,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto user) {
-        User existingUser = userRepository.findById(user.getId()).get();
+        User existingUser = userRepository.findById(user.getId()).orElseThrow(
+                () -> new ResourceNotFound("User", "id", user.getId())
+        );
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
@@ -73,6 +78,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFound("user", "id", id)
+        );
         userRepository.deleteById(id);
     }
 }
