@@ -1,10 +1,10 @@
 package springrestapii.demo.service;
 
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
-import springrestapii.demo.mapper.UserMapper;
 import springrestapii.demo.repository.UserRepository;
 
 import java.util.List;
@@ -17,14 +17,18 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    private ModelMapper modelMapper;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         //converting UserDto to JPA entity and then pass as argument to repository.
-        User user = UserMapper.convertToJpa(userDto);
+        User user = modelMapper.map(userDto, User.class);
 
         User savedUser = userRepository.save(user);
 
-        return UserMapper.convertToDto(savedUser);
+        UserDto savedUserDto = modelMapper.map(savedUser,UserDto.class);
+
+        return savedUserDto;
     }
 
     @Override
@@ -32,14 +36,14 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findById(id);
         User usersList = user.get();
 
-        return UserMapper.convertToDto(usersList);
+        return modelMapper.map(usersList,UserDto.class);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
 
-        return users.stream().map((UserMapper::convertToDto))
+        return users.stream().map((user -> modelMapper.map(user,UserDto.class)))
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +53,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
-        return UserMapper.convertToDto(userRepository.save(existingUser));
+        return modelMapper.map(userRepository.save(existingUser),UserDto.class);
     }
 
     @Override

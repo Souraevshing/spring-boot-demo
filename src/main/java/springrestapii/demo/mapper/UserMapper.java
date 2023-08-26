@@ -5,6 +5,8 @@ import springrestapii.demo.entity.User;
 
 //UserMapper class is used to make conversion of JPA to User Dto and vice-versa.
 //creating static method to convert and reduce same code again and again.
+
+//in this project, we are not using this class to convert rather using 3rd party library ModelMapper and MapStruct
 public class UserMapper {
 
     public static UserDto convertToDto(User user) {
