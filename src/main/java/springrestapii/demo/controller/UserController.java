@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
 import springrestapii.demo.service.UserService;
 
@@ -17,9 +18,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.createUser(user);
-        return  new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
+        UserDto savedUser = userService.createUser(user);
+        return  new ResponseEntity<UserDto>(savedUser, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")

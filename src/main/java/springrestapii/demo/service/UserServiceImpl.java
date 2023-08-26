@@ -2,7 +2,9 @@ package springrestapii.demo.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
+import springrestapii.demo.mapper.UserMapper;
 import springrestapii.demo.repository.UserRepository;
 
 import java.util.List;
@@ -15,8 +17,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        //converting UserDto to JPA entity and then pass as argument to repository.
+        User user = UserMapper.convertToJpa(userDto);
+
+        User savedUser = userRepository.save(user);
+
+        return UserMapper.convertToDto(savedUser);
     }
 
     @Override
