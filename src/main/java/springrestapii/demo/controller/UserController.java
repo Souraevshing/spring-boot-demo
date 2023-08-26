@@ -51,20 +51,4 @@ public class UserController {
         return new ResponseEntity<>("Deleted",HttpStatus.OK);
     }
 
-    //@ExceptionHandler is used to throw custom exception like here we are throwing custom error message, code.
-    //In parameter of @ExceptionHandler we pass Exception class name which we want to throw, here we are throwing exception from
-    //ResourceNotFound class
-
-    @ExceptionHandler(ResourceNotFound.class)
-    public ResponseEntity<Error> handleError(ResourceNotFound resourceNotFound, WebRequest request) {
-        Error errorDetails = new Error(
-                LocalDateTime.now(),
-                resourceNotFound.getMessage(),
-                request.getDescription(false),
-                404L
-        );
-
-        return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
-    }
-
 }
