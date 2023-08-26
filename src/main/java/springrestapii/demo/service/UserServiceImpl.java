@@ -7,7 +7,6 @@ import springrestapii.demo.dto.UserDto;
 import springrestapii.demo.entity.User;
 import springrestapii.demo.exception.EmailException;
 import springrestapii.demo.exception.ResourceNotFound;
-import springrestapii.demo.mapper.UserMapper;
 import springrestapii.demo.mapper.UserMapping;
 import springrestapii.demo.repository.UserRepository;
 

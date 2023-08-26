@@ -1,17 +1,16 @@
 package springrestapii.demo.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 import springrestapii.demo.dto.UserDto;
-import springrestapii.demo.exception.Error;
-import springrestapii.demo.exception.ResourceNotFound;
 import springrestapii.demo.service.UserService;
-
-import java.time.LocalDateTime;
 import java.util.List;
+
+//Used @Valid annotation with UserDto class to validate fields before sending request.
+//Validation will be done as mentioned in UserDto class.
 
 @RestController
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto user) {
         UserDto savedUser = userService.createUser(user);
         return  new ResponseEntity<UserDto>(savedUser, HttpStatus.CREATED);
     }
